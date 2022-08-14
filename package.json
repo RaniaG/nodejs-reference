@@ -1,0 +1,16 @@
+{
+  "name": "nodejs-reference",
+  "version": "1.0.0",
+  "description": "",
+  "main": "first-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-server": "node first-server.js",
+    "start": "nodemon first-server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
