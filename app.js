@@ -16,7 +16,8 @@ app.use('/',(req,res,next)=>{
 });
 
 app.use(shopRoutes)
-app.use(adminRoutes)
+//all child routes should start with /admin
+app.use('/admin',adminRoutes)
 
 //wildcard default matches all routes
 app.use((req, res)=>{
