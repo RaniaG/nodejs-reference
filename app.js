@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const { mainDirectory } = require("../utils/path");
+const { mainDirectory } = require("./utils/path");
 
 const app = express();
 
@@ -10,6 +10,8 @@ const shopRoutes = require("./routes/shop");
 
 //this middleware parses the request body into key value object
 app.use(bodyParser.urlencoded());
+//this middleware serves static files
+app.use(express.static(path.join(__dirname,'public')));
 
 //this always runs
 app.use("/", (req, res, next) => {
