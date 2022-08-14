@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
 //this middleware parses the request body into key value object
 app.use(bodyParser.urlencoded());
 
@@ -12,18 +15,12 @@ app.use('/',(req,res,next)=>{
     next();
 });
 
-app.use('/add-product',(req,res)=>{
-    res.send('<form method="POST" action="/product"> <input name="title" type="text"/> <button type="submit" > Add </button></form>');
-})
-
-app.use('/product',(req,res)=>{
-    console.log(req.body);
-    res.send(`<p> ${req.body['title']} added`);
-})
+app.use(shopRoutes)
+app.use(adminRoutes)
 
 //wildcard default matches all routes
-app.use('/',(req, res)=>{
-    res.send('<h1> hello from express </h1>')
+app.use((req, res)=>{
+    res.status(404).send('<h1> Page not found </h1>')
 });
 
 app.listen(3000);
