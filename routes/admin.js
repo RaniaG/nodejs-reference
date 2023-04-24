@@ -1,16 +1,20 @@
-const express = require("express");
-const router = express.Router();
-const path = require("path");
-const { mainDirectory } = require("../utils/path");
+const path = require('path');
 
-router.use("/add-product", (req, res) => {
-  res.sendFile(path.join(mainDirectory, "views", "add-product.html"));
+const express = require('express');
+
+const rootDir = require('../util/path');
+
+const router = express.Router();
+
+// /admin/add-product => GET
+router.get('/add-product', (req, res, next) => {
+  res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
 });
 
-//if we try to access it using get method we will be redirected to /
-router.post("/product", (req, res) => {
+// /admin/add-product => POST
+router.post('/add-product', (req, res, next) => {
   console.log(req.body);
-  res.send(`<p> ${req.body["title"]} added`);
+  res.redirect('/');
 });
 
 module.exports = router;
