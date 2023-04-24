@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.set("view engine", "pug");
+//folder where templates are stored
 app.set("views", "templates");
 
 const admin = require("./routes/admin");
