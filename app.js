@@ -2,12 +2,14 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
+// const expressHbs = require("express-handlebars");
 
 const app = express();
 
+// app.engine("hbs", expressHbs);
 app.set("view engine", "pug");
 //folder where templates are stored
-app.set("views", "templates");
+// app.set("views", "templates");
 
 const admin = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
