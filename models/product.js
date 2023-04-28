@@ -34,6 +34,16 @@ module.exports = class Product {
     });
   }
 
+  static update(id, updatedProduct) {
+    this.fetchAll((all) => {
+      const index = all.findIndex((p) => p.id === id);
+      all[index] = { ...all[index], ...updatedProduct };
+      fs.writeFile(p, JSON.stringify(all), (err) => {
+        console.log(err);
+      });
+    });
+  }
+
   static fetchAll(cb) {
     getProductsFromFile(cb);
   }
