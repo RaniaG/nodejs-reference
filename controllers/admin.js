@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const Cart = require("../models/cart");
 
 exports.getAddProduct = (req, res, next) => {
   res.render("admin/add-product", {
@@ -55,4 +56,11 @@ exports.getProducts = (req, res, next) => {
       path: "/admin/products",
     });
   });
+};
+
+exports.postDeleteProduct = (req, res, next) => {
+  const id = req.params.productId;
+  Product.delete(id);
+  Cart.deleteProduct(id);
+  res.redirect("/");
 };
