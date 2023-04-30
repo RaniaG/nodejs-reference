@@ -3,32 +3,21 @@
 
     <body>
         <%- include('../includes/navigation.ejs') %>
-
         <main>
             <% if (cart.products.length > 0) { %>
-                <h3>
-                   Total Count: <%= cart.totalCount %>
-                </h3>
-                <div class="grid">
-                    <% for (let product of cart.products) { %>
-                        <article class="card product-item">
-                            <header class="card__header">
-                                <h1 class="product__title">
-                                    <%= product.id %>
-                                </h1>
-                            </header>
-                                <p class="product__description">
-                                    <%= product.qty %>
-                                </p>
-                            </div>
-                        </article>
-                        <% } %>
-                </div>
-                <h3>
-                    Total Price: <%= cart.totalPrice %>
-                 </h3>
-                <% } else { %>
-                    <h1>No Products Found!</h1>
-                    <% } %>
+                <ul>
+                    <% cart.products.forEach(p => { %>
+                        <li>
+                            <p><%=p.title%> (<%= p.qty %>)</p>
+                            <form action="/cart-delete-item" method="POST">
+                                <input type="hidden" value="<%= p.id %>" name="productId">
+                                <button class="btn" type="submit">Delete</button>
+                            </form>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <h1>No Products in Cart!</h1>
+            <% } %>
         </main>
         <%- include('../includes/end.ejs') %>
