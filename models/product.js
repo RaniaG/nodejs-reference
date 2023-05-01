@@ -1,25 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-
-const p = path.join(
-  path.dirname(process.mainModule.filename),
-  "data",
-  "products.json"
-);
-
-const getProductsFromFile = (cb) => {
-  fs.readFile(p, (err, fileContent) => {
-    if (err) {
-      cb([]);
-    } else {
-      cb(JSON.parse(fileContent));
-    }
-  });
-};
+const getDb = require("../util/database").getDb;
 
 module.exports = class Product {
   constructor(title, imageUrl, description, price) {
-    this.id = Math.random().toString();
     this.title = title;
     this.imageUrl = imageUrl;
     this.description = description;
@@ -27,12 +9,11 @@ module.exports = class Product {
   }
 
   save() {
-    getProductsFromFile((products) => {
-      products.push(this);
-      fs.writeFile(p, JSON.stringify(products), (err) => {
-        console.log(err);
-      });
-    });
+    const db = getDb();
+    db.collection("products")
+      .insertOne(this)
+      .then(console.log)
+      .catch(console.log);
   }
 
   static update(id, updatedProduct) {
